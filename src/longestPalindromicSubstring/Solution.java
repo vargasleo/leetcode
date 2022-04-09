@@ -1,0 +1,4 @@
+package longestPalindromicSubstring;
+
+class Solution {
+}

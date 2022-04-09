@@ -1,0 +1,4 @@
+package zigzagConversion;
+
+class Solution {
+}

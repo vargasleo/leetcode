@@ -1,0 +1,4 @@
+package longestSubstringWithoutRepChars;
+
+class Solution {
+}

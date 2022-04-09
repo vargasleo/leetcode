@@ -1,0 +1,4 @@
+package palindromeNumber;
+
+class Solution {
+}
