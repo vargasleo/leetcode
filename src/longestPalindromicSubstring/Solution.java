@@ -1,34 +1,51 @@
 package longestPalindromicSubstring;
 
 /**
- * 4. Median of Two Sorted Arrays
- * Hard
+ * 5. Longest Palindromic Substring
+ * Medium
  * <p>
- * Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
- * The overall run time complexity should be O(log (m+n)).
+ * Given a string s, return the longest palindromic substring in s.
  * <p>
  * Example 1:
- * Input: nums1 = [1,3], nums2 = [2]
- * Output: 2.00000
- * Explanation: merged array = [1,2,3] and median is 2.
+ * Input: s = "babad"
+ * Output: "bab"
+ * Explanation: "aba" is also a valid answer.
  * <p>
  * Example 2:
- * Input: nums1 = [1,2], nums2 = [3,4]
- * Output: 2.50000
- * Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+ * Input: s = "cbbd"
+ * Output: "bb"
  * <p>
  * Constraints:
- * <p>
- * nums1.length == m
- * nums2.length == n
- * 0 <= m <= 1000
- * 0 <= n <= 1000
- * 1 <= m + n <= 2000
- * -106 <= nums1[i], nums2[i] <= 106
+ * 1 <= s.length <= 1000
+ * s consist of only digits and English letters.
  */
 class Solution {
 
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        return 1.0;
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) return "";
+
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int lenEvenPalindrome = lookAround(s, i, i);
+            int lenOddPalindrome = lookAround(s, i, i + 1);
+            int len = Math.max(lenEvenPalindrome, lenOddPalindrome);
+            if (len > end - start) {
+                start = i - ((len - 1) / 2);
+                end = i + (len / 2);
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private int lookAround(String s, int left, int right) {
+        if (s == null || s.length() < 1) return 0;
+
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
     }
 }
